@@ -31,9 +31,9 @@ Public Class Frm_Main
         graph.DrawString("Empfänger:", fontEmpfaenger, XBrushes.Black, New XRect(10, 5, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
 
         graph.DrawString(Name, fontAdresse, XBrushes.Black, New XRect(20, 40, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
-        graph.DrawString(AdressZeile1, fontAdresse, XBrushes.Black, New XRect(20, 70, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
-        graph.DrawString(AdressZeile2, fontAdresse, XBrushes.Black, New XRect(20, 100, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
-        graph.DrawString(AdressZeile3, fontAdresse, XBrushes.Black, New XRect(20, 130, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
+        graph.DrawString(AdressZeile1, fontAdresse, XBrushes.Black, New XRect(15, 70, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
+        graph.DrawString(AdressZeile2, fontAdresse, XBrushes.Black, New XRect(15, 100, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
+        graph.DrawString(AdressZeile3, fontAdresse, XBrushes.Black, New XRect(15, 130, pdfPage.Width.Point, pdfPage.Height.Point), XStringFormats.TopLeft)
 
         Randomize()
         Dim rndNumber As Short = (1024 * Rnd() + 0)
