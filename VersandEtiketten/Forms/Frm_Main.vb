@@ -169,4 +169,10 @@ Public Class Frm_Main
 
 
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim textToPrint As String() = {TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text}
+
+        PrintRaw.Print(textToPrint, "Brother QL-800", 60, 100, CDbl(ComboBox1.SelectedItem.ToString))
+    End Sub
 End Class

@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppProperties\Mod_AppProperties.vb" />
+    <Compile Include="Classes\PrintRaw.vb" />
     <Compile Include="Forms\Frm_Main.vb">
       <SubType>Form</SubType>
     </Compile>

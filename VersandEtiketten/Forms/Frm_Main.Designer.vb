@@ -36,6 +36,7 @@ Partial Class Frm_Main
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -131,11 +132,11 @@ Partial Class Frm_Main
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(292, 249)
+        Me.Button1.Location = New System.Drawing.Point(209, 249)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(92, 25)
+        Me.Button1.Size = New System.Drawing.Size(111, 25)
         Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Print"
+        Me.Button1.Text = "Print (Acrobat)"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
@@ -158,11 +159,22 @@ Partial Class Frm_Main
         Me.Button3.Text = "Clipboard Picture -> PDF"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(326, 249)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(67, 25)
+        Me.Button4.TabIndex = 4
+        Me.Button4.Text = "Print"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(408, 317)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -192,4 +204,5 @@ Partial Class Frm_Main
     Friend WithEvents Button2 As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class
