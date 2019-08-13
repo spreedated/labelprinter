@@ -174,5 +174,28 @@ Public Class Frm_Main
         Dim textToPrint As String() = {TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text}
 
         PrintRaw.Print(textToPrint, "Brother QL-800", 60, 100, CDbl(ComboBox1.SelectedItem.ToString))
+
+        DrawPreview()
+    End Sub
+
+    Private Sub DrawPreview()
+        Dim myFontHead As Font = New Font("GeForce", 12)
+        Dim myFont As Font = New Font("GeForce", CDbl(ComboBox1.SelectedItem.ToString))
+
+        Dim b As Graphics = Label5.CreateGraphics
+        With b
+            .Clear(Color.White)
+            .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+            .TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit
+            .DrawString("Empfänger:", New Font(myFontHead, FontStyle.Bold), Brushes.Black, 10, 10)
+            .DrawString(TextBox1.Text, New Font(myFont, FontStyle.Bold), Brushes.Black, 40, 40)
+            .DrawString(TextBox2.Text, New Font(myFont, FontStyle.Bold), Brushes.Black, 40, 100)
+            .DrawString(TextBox3.Text, New Font(myFont, FontStyle.Bold), Brushes.Black, 40, 140)
+            .DrawString(TextBox4.Text, New Font(myFont, FontStyle.Bold), Brushes.Black, 40, 180)
+        End With
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged, TextBox2.TextChanged, TextBox3.TextChanged, TextBox4.TextChanged, ComboBox1.SelectedIndexChanged
+        DrawPreview()
     End Sub
 End Class

@@ -37,7 +37,11 @@ Partial Class Frm_Main
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -169,11 +173,41 @@ Partial Class Frm_Main
         Me.Button4.Text = "Print"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Location = New System.Drawing.Point(399, 12)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(392, 262)
+        Me.GroupBox2.TabIndex = 5
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Preview"
+        '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(6, 22)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(377, 227)
+        Me.Label5.TabIndex = 0
+        '
+        'Button5
+        '
+        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(134, 280)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(67, 25)
+        Me.Button5.TabIndex = 6
+        Me.Button5.Text = "Prev"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 317)
+        Me.ClientSize = New System.Drawing.Size(797, 317)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -187,6 +221,7 @@ Partial Class Frm_Main
         Me.Text = "###"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -205,4 +240,7 @@ Partial Class Frm_Main
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Button5 As Button
 End Class
