@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.438
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VersandEtiketten", "VersandEtiketten\VersandEtiketten.vbproj", "{C64E3A07-CFA3-4242-8E30-D5A4603BBEF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersandEtiketten2", "VersandEtiketten2\VersandEtiketten2.csproj", "{C6B85B62-BE14-405F-9E37-B1E865A3A79F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C64E3A07-CFA3-4242-8E30-D5A4603BBEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C64E3A07-CFA3-4242-8E30-D5A4603BBEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C64E3A07-CFA3-4242-8E30-D5A4603BBEF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B85B62-BE14-405F-9E37-B1E865A3A79F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B85B62-BE14-405F-9E37-B1E865A3A79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B85B62-BE14-405F-9E37-B1E865A3A79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B85B62-BE14-405F-9E37-B1E865A3A79F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
