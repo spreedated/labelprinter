@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Druck von Versandetiketten für Brother-QL800")>
 <Assembly: AssemblyCompany("neXn-Systems")>
 <Assembly: AssemblyProduct("VersandEtiketten")>
-<Assembly: AssemblyCopyright("2019 © neXn-Systems")>
+<Assembly: AssemblyCopyright("2019-2020 © neXn-Systems")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.6.0.0")>
-<Assembly: AssemblyFileVersion("0.6.0.0")>
+<Assembly: AssemblyVersion("0.7.0.0")>
+<Assembly: AssemblyFileVersion("0.7.0.0")>
