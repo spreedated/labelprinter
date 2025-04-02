@@ -1,0 +1,125 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LabelPrinter.ViewModels"
+        xmlns:vl="using:LabelPrinter.ViewLogic"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="400"
+        x:Class="LabelPrinter.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/icon.ico"
+        Title="{Binding Title}"
+        MinHeight="400"
+        MinWidth="920"
+        Width="920"
+        Height="400"
+        SizeChanged="Window_SizeChanged"
+        Loaded="Window_Loaded">
+
+  <Window.DataContext>
+    <vm:MainWindowViewModel/>
+  </Window.DataContext>
+
+  <Grid Margin="8">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Orientation="Horizontal" Margin="12,0,0,4">
+      <Image Source="/Assets/icon.png" MaxHeight="36" Margin="0,0,8,0"/>
+      <TextBlock FontWeight="Bold">
+        <TextBlock.Text>
+          <MultiBinding Converter="{vl:TitleConverter}">
+            <MultiBinding.Bindings>
+              <Binding Path="AppTitle"/>
+              <Binding Path="AppVersion"/>
+            </MultiBinding.Bindings>
+          </MultiBinding>
+        </TextBlock.Text>
+      </TextBlock>
+    </StackPanel>
+    
+    <Grid Grid.Row="1" Margin="0,0,0,5">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <HeaderedContentControl Grid.Column="0" Header="Etikett 100x62mm" Margin="0,0,4,0">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,8">
+            <TextBlock Text="Textsize:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <ComboBox ItemsSource="{Binding AvailableTextSizes, Mode=OneWay}" SelectedItem="{Binding SelectedTextSize}" />
+          </StackPanel>
+
+          <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Grid Margin="0,0,0,4">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="60"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              
+              <TextBlock Text="Zeile 1:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <TextBox Grid.Column="1" Text="{Binding Line1, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <Grid Margin="0,0,0,4">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="60"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <TextBlock Text="Zeile 2:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <TextBox Grid.Column="1" Text="{Binding Line2, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <Grid Margin="0,0,0,4">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="60"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <TextBlock Text="Zeile 3:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <TextBox Grid.Column="1" Text="{Binding Line3, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid Margin="0,0,0,4">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="60"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <TextBlock Text="Zeile 4:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <TextBox Grid.Column="1" Text="{Binding Line4, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+          </StackPanel>
+          
+          <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Content="Print (Acrobat)" Margin="0,0,4,0"/>
+            <Button Content="Print" Command="{Binding PrintCommand}"/>
+          </StackPanel>
+        </Grid>
+      </HeaderedContentControl>
+
+      <HeaderedContentControl x:Name="Preview" Grid.Column="1" Header="Preview" Margin="4,0,0,0">
+        <Image Source="{Binding RenderedImage, Mode=OneWay}" Stretch="None" />
+      </HeaderedContentControl>
+    </Grid>
+
+    <Grid Grid.Row="2">
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="{Binding Status}" HorizontalAlignment="Left"/>
+      </StackPanel>
+      <TextBlock Text="{Binding AppVersion}" HorizontalAlignment="Right" FontStyle="Italic" FontSize="12" Margin="0,0,8,0" FontWeight="Bold" Foreground="#555555" />
+    </Grid>
+  </Grid>
+
+</Window>
