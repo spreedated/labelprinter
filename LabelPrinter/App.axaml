@@ -5,7 +5,13 @@
              RequestedThemeVariant="Dark">
   
     <Application.Styles>
-        <FluentTheme />
+      <FluentTheme />
+
+      <Style Selector="Border#BorderWindow">
+        <Setter Property="Background" Value="#222222"/>
+        <Setter Property="CornerRadius" Value="16"/>
+        <Setter Property="Padding" Value="8"/>
+      </Style>
 
       <Style Selector="HeaderedContentControl">
         <Setter Property="Template">

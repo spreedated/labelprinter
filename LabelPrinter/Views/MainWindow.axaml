@@ -14,7 +14,8 @@
         Width="920"
         Height="400"
         SizeChanged="Window_SizeChanged"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
 
   <Window.DataContext>
     <vm:MainWindowViewModel/>
@@ -47,7 +48,7 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <HeaderedContentControl Grid.Column="0" Header="Etikett 100x62mm" Margin="0,0,4,0">
+      <HeaderedContentControl Grid.Column="0" Header="{Binding GroupBoxLabelText}" Margin="0,0,4,0" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -55,13 +56,25 @@
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
 
-          <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,8">
-            <TextBlock Text="Textsize:" VerticalAlignment="Center" Margin="0,0,8,0"/>
-            <ComboBox ItemsSource="{Binding AvailableTextSizes, Mode=OneWay}" SelectedItem="{Binding SelectedTextSize}" />
-          </StackPanel>
+          <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" MinWidth="60"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <CheckBox Content="Draw default" Height="16" VerticalAlignment="Center" IsChecked="{Binding DrawEmpfaenger}" Margin="0,0,8,0"/>
+                <CheckBox Content="Use free text" Height="16" VerticalAlignment="Center" IsChecked="{Binding UseTextfield}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,8">
+              <TextBlock Text="Textsize:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+              <ComboBox ItemsSource="{Binding AvailableTextSizes, Mode=OneWay}" SelectedItem="{Binding SelectedTextSize}" />
+            </StackPanel>
+          </Grid>
 
           <StackPanel Grid.Row="1" Orientation="Vertical">
-            <Grid Margin="0,0,0,4">
+            <Grid Margin="0,0,0,4" IsVisible="{Binding UseTextfield, Converter={vl:ReverseBoolConverter}}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="*"/>
@@ -71,7 +84,7 @@
               <TextBox Grid.Column="1" Text="{Binding Line1, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
-            <Grid Margin="0,0,0,4">
+            <Grid Margin="0,0,0,4" IsVisible="{Binding UseTextfield, Converter={vl:ReverseBoolConverter}}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="*"/>
@@ -81,7 +94,7 @@
               <TextBox Grid.Column="1" Text="{Binding Line2, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
-            <Grid Margin="0,0,0,4">
+            <Grid Margin="0,0,0,4" IsVisible="{Binding UseTextfield, Converter={vl:ReverseBoolConverter}}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="*"/>
@@ -91,7 +104,7 @@
               <TextBox Grid.Column="1" Text="{Binding Line3, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
-            <Grid Margin="0,0,0,4">
+            <Grid Margin="0,0,0,4" IsVisible="{Binding UseTextfield, Converter={vl:ReverseBoolConverter}}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="*"/>
@@ -100,12 +113,26 @@
               <TextBlock Text="Zeile 4:" VerticalAlignment="Center" Margin="0,0,8,0"/>
               <TextBox Grid.Column="1" Text="{Binding Line4, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
+
+            <TextBox Margin="0,0,0,4" Text="{Binding FreeText, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" IsVisible="{Binding UseTextfield}"/>
           </StackPanel>
-          
-          <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button Content="Print (Acrobat)" Margin="0,0,4,0"/>
-            <Button Content="Print" Command="{Binding PrintCommand}"/>
-          </StackPanel>
+
+          <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+              <Button Content="Clear" Command="{Binding ClearAllCommand}" Foreground="DarkRed" Margin="0,0,4,0"/>
+              <Button Content="Options" Command="{Binding ShowOptionsCommand}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+              <NumericUpDown Value="{Binding PrintCount}" Minimum="1" Maximum="99" Margin="0,0,8,0" Increment="1" FormatString="0"/>
+              <Button Content="{Binding Printername, StringFormat=Print ({0})}" Command="{Binding PrintCommand}"/>
+            </StackPanel>
+          </Grid>
         </Grid>
       </HeaderedContentControl>
 
@@ -118,7 +145,7 @@
       <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Status}" HorizontalAlignment="Left"/>
       </StackPanel>
-      <TextBlock Text="{Binding AppVersion}" HorizontalAlignment="Right" FontStyle="Italic" FontSize="12" Margin="0,0,8,0" FontWeight="Bold" Foreground="#555555" />
+      <TextBlock Text="{Binding AppVersion}" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontStyle="Italic" FontSize="12" Margin="0,0,4,0" FontWeight="Bold" Foreground="#555555" />
     </Grid>
   </Grid>
 

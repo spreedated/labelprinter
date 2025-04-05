@@ -1,21 +1,76 @@
 ﻿using Avalonia;
+using LabelPrinter.Logic;
+using Microsoft.Extensions.Logging;
+using neXn.Lib.ConfigurationHandler;
+using QuestPDF.Infrastructure;
+using Serilog;
+using Serilog.Events;
+using Serilog.Extensions.Logging;
+using SixLabors.ImageSharp;
 using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace LabelPrinter
 {
     internal static class Program
     {
-        // Initialization code. Don't use any Avalonia, third-party APIs or any
-        // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
-        // yet and stuff might break.
+        private readonly static LogEventLevel minimumLevel = LogEventLevel.Verbose;
+
         [STAThread]
         public static void Main(string[] args)
         {
-            BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+            // Setup logger
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .Enrich.FromLogContext()
+            .WriteTo.Console(restrictedToMinimumLevel: minimumLevel)
+            .WriteTo.Debug()
+            .Enrich.WithProperty("Application", typeof(Program).Assembly.GetName().Name)
+            .CreateLogger();
+
+            Microsoft.Extensions.Logging.ILogger logger = new SerilogLoggerProvider().CreateLogger("app");
+
+            logger.LogInformation("Starting up");
+
+            QuestPDF.Settings.License = LicenseType.Community;
+            logger.LogTrace("QuestPDF Community license set");
+
+            Globals.UserConfig = new ConfigurationHandler<Models.Configuration>(new(Path.Combine(AppContext.BaseDirectory, "config", "config.json")));
+            Globals.UserConfig.Load().Wait();
+            logger.LogInformation("Loaded user config");
+
+            logger.LogTrace("Deploying resources...");
+            Stopwatch sw = Stopwatch.StartNew();
+            // Deploy extern resources
+            foreach (string f in Globals.Assembly.GetManifestResourceNames().Where(x => x.Contains(".Extern.")))
+            {
+                if (f.EndsWith("exe") && OperatingSystem.IsWindows())
+                {
+                    string filename = string.Join('.', f.Split('.').Skip(2));
+
+                    string filepath = Path.Combine(AppContext.BaseDirectory, filename);
+
+                    if (!File.Exists(filepath))
+                    {
+                        using (Stream s = Globals.Assembly.GetManifestResourceStream($"{Globals.Assembly.GetName().Name}.Extern.{filename}"))
+                        {
+                            using (FileStream fs = File.Create(filename))
+                            {
+                                s.CopyTo(fs);
+                            }
+                        }
+                    }
+                }
+            }
+            sw.Stop();
+            logger.LogTrace("Deployed resources in {ElapsedMilliseconds}ms", sw.ElapsedMilliseconds);
+
+            logger.LogTrace("Loading/building app...");
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
 
-        // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
         {
             return AppBuilder.Configure<App>()

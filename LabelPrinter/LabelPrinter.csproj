@@ -12,10 +12,10 @@
     <AssemblyTitle>Label Printer</AssemblyTitle>
     <RootNamespace>LabelPrinter</RootNamespace>
     <Version>3.0.0</Version>
+    <NoWarn>1701;1702;IDE0063</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
@@ -25,8 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Extern\SumatraPDF-3.5.2-64.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Assets\GEFORCE-BOLD.TTF" />
     <EmbeddedResource Include="Assets\GEFORCE-LIGHT.TTF" />
+    <EmbeddedResource Include="Extern\SumatraPDF-3.5.2-64.exe" />
   </ItemGroup>
 
 
@@ -37,7 +42,19 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.6" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.6" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="QuestPDF" Version="2025.1.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="neXn.Lib.ConfigurationHandler">
+      <HintPath>..\Libraries\neXn.Lib.ConfigurationHandler.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

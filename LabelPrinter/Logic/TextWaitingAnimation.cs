@@ -77,6 +77,11 @@ namespace LabelPrinter.Logic
 
         private void Timer_Tick(object sender, ElapsedEventArgs e)
         {
+            if (this.animationIndex >= this.animationParts.Length)
+            {
+                return;
+            }
+
             this.AnimationChanged?.Invoke(this, $"{(this.UseBrackets ? "[" : "")}{this.animationParts[this.animationIndex]}{(this.UseBrackets ? "]" : "")}");
 
             this.animationIndex++;

@@ -22,7 +22,6 @@ namespace LabelPrinter.Views
             {
                 Dispatcher.UIThread.Invoke(() => ((MainWindowViewModel)this.DataContext).RenderImage());
             }
-
         }
 
         private void Window_Loaded(object sender, Avalonia.Interactivity.RoutedEventArgs e)

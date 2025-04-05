@@ -1,0 +1,75 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:LabelPrinter.ViewModels"
+        xmlns:vl="using:LabelPrinter.ViewLogic"
+        x:DataType="vm:OptionsViewModel"
+        mc:Ignorable="d" 
+        x:Class="LabelPrinter.Views.Options"
+        Title="Options"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        CanResize="False"
+        SizeToContent="Height"
+        Width="240"
+        Opacity="0.8"
+        SystemDecorations="None">
+
+  <Window.DataContext>
+    <vm:OptionsViewModel/>
+  </Window.DataContext>
+
+  <Border x:Name="BorderWindow">
+    <StackPanel Orientation="Vertical" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}">
+      <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+        <Grid Margin="0,0,0,8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock Grid.Row="0" Grid.Column="0" Text="Printername:" Margin="0,0,8,0" VerticalAlignment="Center"/>
+          <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding PrinterName}">
+            <TextBox.KeyBindings>
+              <KeyBinding  Command="{Binding SaveAndExitCommand}" Gesture="Enter" />
+            </TextBox.KeyBindings>
+          </TextBox>
+        </Grid>
+        
+        <Grid Margin="0,0,0,8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+        
+          <TextBlock Grid.Row="0" Grid.Column="0" Text="Label Width:" Margin="0,0,8,0" VerticalAlignment="Center"/>
+          <NumericUpDown ShowButtonSpinner="False" Grid.Row="0" Grid.Column="1" Value="{Binding LabelWidth}" Minimum="10">
+            <NumericUpDown.KeyBindings>
+              <KeyBinding  Command="{Binding SaveAndExitCommand}" Gesture="Enter" />
+            </NumericUpDown.KeyBindings>
+          </NumericUpDown>
+        </Grid>
+
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock Grid.Row="0" Grid.Column="0" Text="Label Height:" Margin="0,0,8,0" VerticalAlignment="Center"/>
+          <NumericUpDown ShowButtonSpinner="False" Grid.Row="0" Grid.Column="1" Value="{Binding LabelHeight}" Minimum="10">
+            <NumericUpDown.KeyBindings>
+              <KeyBinding  Command="{Binding SaveAndExitCommand}" Gesture="Enter" />
+            </NumericUpDown.KeyBindings>
+          </NumericUpDown>
+        </Grid>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Content="Apply &amp; Exit" Command="{Binding SaveAndExitCommand}"/>
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</Window>
