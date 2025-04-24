@@ -60,5 +60,11 @@
     <Reference Include="neXn.Lib.ConfigurationHandler">
       <HintPath>..\Libraries\neXn.Lib.ConfigurationHandler.dll</HintPath>
     </Reference>
+    <Reference Include="neXn.Ui">
+      <HintPath>..\Libraries\neXn.Ui.dll</HintPath>
+    </Reference>
+    <Reference Include="neXn.Ui.Avalonia">
+      <HintPath>..\Libraries\neXn.Ui.Avalonia.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
