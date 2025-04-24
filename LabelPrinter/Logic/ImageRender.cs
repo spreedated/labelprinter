@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LabelPrinter.Logic
+namespace LabelWhisper.Logic
 {
     public class ImageRender : IDisposable
     {

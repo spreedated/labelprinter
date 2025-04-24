@@ -3,9 +3,10 @@ using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LabelPrinter.Logic;
-using LabelPrinter.Views;
+using LabelWhisper.Logic;
+using LabelWhisper.Views;
 using Microsoft.Extensions.Logging;
+using neXn.Ui.Animation;
 using Serilog.Extensions.Logging;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace LabelPrinter.ViewModels
+namespace LabelWhisper.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {

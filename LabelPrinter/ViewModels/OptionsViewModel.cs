@@ -1,10 +1,10 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LabelPrinter.Logic;
+using LabelWhisper.Logic;
 using System.Threading.Tasks;
 
-namespace LabelPrinter.ViewModels
+namespace LabelWhisper.ViewModels
 {
     public partial class OptionsViewModel : ObservableObject
     {

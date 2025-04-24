@@ -1,9 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using LabelPrinter.Views;
+using LabelWhisper.Views;
 
-namespace LabelPrinter
+namespace LabelWhisper
 {
     public partial class App : Application
     {

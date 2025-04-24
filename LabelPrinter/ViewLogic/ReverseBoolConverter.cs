@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 using System;
 using System.Globalization;
 
-namespace LabelPrinter.ViewLogic
+namespace LabelWhisper.ViewLogic
 {
     public class ReverseBoolConverter : MarkupExtension, IValueConverter
     {

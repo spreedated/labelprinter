@@ -1,5 +1,5 @@
 ﻿using Avalonia;
-using LabelPrinter.Logic;
+using LabelWhisper.Logic;
 using Microsoft.Extensions.Logging;
 using neXn.Lib.ConfigurationHandler;
 using QuestPDF.Infrastructure;
@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace LabelPrinter
+namespace LabelWhisper
 {
     internal static class Program
     {

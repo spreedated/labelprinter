@@ -1,8 +1,8 @@
-﻿using LabelPrinter.Models;
+﻿using LabelWhisper.Models;
 using neXn.Lib.ConfigurationHandler;
 using System.Reflection;
 
-namespace LabelPrinter.Logic
+namespace LabelWhisper.Logic
 {
     internal static class Globals
     {

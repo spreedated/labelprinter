@@ -2,9 +2,9 @@
 
 using Avalonia.Controls;
 using Avalonia.Threading;
-using LabelPrinter.ViewModels;
+using LabelWhisper.ViewModels;
 
-namespace LabelPrinter.Views
+namespace LabelWhisper.Views
 {
     public partial class MainWindow : Window
     {
