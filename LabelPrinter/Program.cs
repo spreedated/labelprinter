@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LabelWhisper
 {
@@ -66,6 +67,17 @@ namespace LabelWhisper
             }
             sw.Stop();
             logger.LogTrace("Deployed resources in {ElapsedMilliseconds}ms", sw.ElapsedMilliseconds);
+
+            //Discover Printers
+            Task.Run(() =>
+            {
+                foreach (string p in PrinterQuery.GetInstalledPrinters())
+                {
+                    Globals.IntalledPrinters.Add(p);
+                }
+
+                logger.LogInformation("Found ({Printercount}) printers on system", Globals.IntalledPrinters.Count);
+            });
 
             logger.LogTrace("Loading/building app...");
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
