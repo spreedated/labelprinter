@@ -47,8 +47,8 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="QuestPDF" Version="2025.4.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.5" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.8" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.6" />
     <PackageReference Include="Serilog" Version="4.2.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
@@ -58,6 +58,9 @@
 
 
   <ItemGroup>
+    <Reference Include="neXn.Lib">
+      <HintPath>..\Libraries\neXn.Lib.dll</HintPath>
+    </Reference>
     <Reference Include="neXn.Lib.ConfigurationHandler">
       <HintPath>..\Libraries\neXn.Lib.ConfigurationHandler.dll</HintPath>
     </Reference>

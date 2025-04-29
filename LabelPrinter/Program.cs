@@ -71,7 +71,7 @@ namespace LabelWhisper
             //Discover Printers
             Task.Run(() =>
             {
-                foreach (string p in PrinterQuery.GetInstalledPrinters())
+                foreach (string p in neXn.Lib.PrinterManagement.Query.GetInstalledPrinters(neXn.Lib.PrinterManagement.Query.PrinterFilter.OnlyLabelPrinters))
                 {
                     Globals.IntalledPrinters.Add(p);
                 }
