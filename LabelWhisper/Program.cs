@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace LabelWhisper
@@ -69,15 +70,18 @@ namespace LabelWhisper
             logger.LogTrace("Deployed resources in {ElapsedMilliseconds}ms", sw.ElapsedMilliseconds);
 
             //Discover Printers
-            //TODO: Make background process loading ...
             Task.Run(() =>
             {
+                Globals.AppStatus.Change("Reading printers...", true);
+
                 foreach (string p in neXn.Lib.PrinterManagement.Query.GetInstalledPrinters(neXn.Lib.PrinterManagement.Query.PrinterFilter.OnlyLabelPrinters))
                 {
                     Globals.IntalledPrinters.Add(p);
                 }
 
                 logger.LogInformation("Found ({Printercount}) printers on system", Globals.IntalledPrinters.Count);
+
+                Globals.AppStatus.Change($"Found ({Globals.IntalledPrinters.Count}) printers on system", false, true);
             });
 
             logger.LogTrace("Loading/building app...");

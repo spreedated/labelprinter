@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using LabelWhisper.Logic;
 using LabelWhisper.Views;
 using Microsoft.Extensions.Logging;
+using neXn.Lib;
 using neXn.Ui.Animation;
 using Serilog.Extensions.Logging;
 using System.ComponentModel;
@@ -19,11 +20,13 @@ namespace LabelWhisper.ViewModels
     public partial class MainWindowViewModel : ObservableObject
     {
         private readonly TextWaitingAnimation textWaitingAnimation;
-        private string currentStatus = "System ready";
         private readonly ILogger logger = new SerilogLoggerProvider().CreateLogger("MainWindowViewModel");
 
         [ObservableProperty]
         private bool isBusy;
+
+        [ObservableProperty]
+        private string status = "System ready";
 
         [ObservableProperty]
         private Window instance;
@@ -39,9 +42,6 @@ namespace LabelWhisper.ViewModels
 
         [ObservableProperty]
         private string groupBoxLabelText;
-
-        [ObservableProperty]
-        private string status;
 
         [ObservableProperty]
         private string appTitle;
@@ -129,7 +129,14 @@ namespace LabelWhisper.ViewModels
         public MainWindowViewModel()
         {
             this.AppTitle = Globals.Assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title;
-            this.AppVersion = $"v{Globals.Assembly.GetName().Version}";
+            this.AppVersion = $"v{Globals.Assembly.GetName().Version.ToNiceString()}";
+
+            Globals.AppStatus.StatusChanged += (s, e) =>
+            {
+                this.IsBusy = Globals.AppStatus.IsBusy;
+                this.Status = e;
+            };
+
             if (Globals.UserConfig != null)
             {
                 this.SelectedTextSize = Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize == default ? this.AvailableTextSizes[^1] : Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize;
@@ -150,7 +157,7 @@ namespace LabelWhisper.ViewModels
 
         private void TextWaitingAnimation_AnimationChanged(object sender, string e)
         {
-            this.Status = $"{e} {this.currentStatus}";
+            this.Status = $"{e} {Globals.AppStatus.Status}";
         }
 
         public async Task RenderImage()
@@ -192,15 +199,13 @@ namespace LabelWhisper.ViewModels
             this.logger?.LogInformation("[{Name}] Printing...", "MainWindowViewModel");
             Stopwatch sw = Stopwatch.StartNew();
 
-            this.IsBusy = true;
-            this.currentStatus = "Printing...";
+            Globals.AppStatus.Change("Printing...", true);
             this.textWaitingAnimation.AnimationType = TextWaitingAnimation.AnimationTypes.ClockCircle;
 
             await Printing.Print((float)this.LabelWidth, (float)this.LabelHeight, this.RenderedImage, this.PrintCount);
 
             this.textWaitingAnimation.AnimationType = TextWaitingAnimation.AnimationTypes.BlockChars;
-            this.currentStatus = "System ready";
-            this.IsBusy = false;
+            Globals.AppStatus.SetDefaultStatus();
 
             sw.Stop();
             this.logger?.LogInformation("[{Name}] Printing finished in {Elapsed}ms", "MainWindowViewModel", sw.ElapsedMilliseconds);
