@@ -12,8 +12,8 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         CanResize="False"
-        SizeToContent="Height"
-        Width="240"
+        SizeToContent="WidthAndHeight"
+        MinWidth="240"
         Opacity="0.8"
         SystemDecorations="None">
 
@@ -31,11 +31,14 @@
           </Grid.ColumnDefinitions>
 
           <TextBlock Grid.Row="0" Grid.Column="0" Text="Printername:" Margin="0,0,8,0" VerticalAlignment="Center"/>
-          <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding PrinterName}">
-            <TextBox.KeyBindings>
-              <KeyBinding  Command="{Binding SaveAndExitCommand}" Gesture="Enter" />
-            </TextBox.KeyBindings>
-          </TextBox>
+          <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <TextBox Text="{Binding PrinterName}" MinWidth="125">
+              <TextBox.KeyBindings>
+                <KeyBinding  Command="{Binding SaveAndExitCommand}" Gesture="Enter" />
+              </TextBox.KeyBindings>
+            </TextBox>
+            <ComboBox PointerEntered="ComboBox_PointerEntered" PointerExited="ComboBox_PointerExited_1" ItemsSource="{Binding AvailablePrinters}" SelectedItem="{Binding SelectedAvailablePrinter}" Margin="8,0,0,0" MinWidth="240"/>
+          </StackPanel>
         </Grid>
         
         <Grid Margin="0,0,0,8">

@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LabelWhisper.Logic;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LabelWhisper.ViewModels
@@ -24,12 +26,26 @@ namespace LabelWhisper.ViewModels
         [NotifyCanExecuteChangedFor(nameof(SaveAndExitCommand))]
         private bool isBusy;
 
+        [ObservableProperty]
+        private BindingList<string> availablePrinters = [];
+
+        [ObservableProperty]
+        private string selectedAvailablePrinter;
+
         #region Ctor
         public OptionsViewModel()
         {
-            this.LabelHeight = Globals.UserConfig.RuntimeConfiguration.LabelHeight;
-            this.LabelWidth = Globals.UserConfig.RuntimeConfiguration.LabelWidth;
-            this.PrinterName = Globals.UserConfig.RuntimeConfiguration.PrinterName;
+            if (!Design.IsDesignMode)
+            {
+                this.LabelHeight = Globals.UserConfig.RuntimeConfiguration.LabelHeight;
+                this.LabelWidth = Globals.UserConfig.RuntimeConfiguration.LabelWidth;
+                this.PrinterName = Globals.UserConfig.RuntimeConfiguration.PrinterName;
+                this.AvailablePrinters = new([.. Globals.IntalledPrinters]);
+                if (this.AvailablePrinters.Contains(this.PrinterName))
+                {
+                    this.SelectedAvailablePrinter = this.PrinterName;
+                }
+            }
         }
         #endregion
 
