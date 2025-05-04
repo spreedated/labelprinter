@@ -46,15 +46,16 @@
     
     <Grid Grid.Row="1" Margin="0,0,0,5">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <HeaderedContentControl Grid.Column="0" Header="{Binding GroupBoxLabelText}" Margin="0,0,4,0" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}">
+      <HeaderedContentControl Grid.Column="0" Header="{Binding GroupBoxLabelText}" Margin="0,0,4,0" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}" MinWidth="420">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
 
@@ -90,6 +91,7 @@
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
 
               <TextBlock Text="Zeile 2:" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -119,22 +121,15 @@
             <TextBox Margin="0,0,0,4" Text="{Binding FreeText, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" IsVisible="{Binding UseTextfield}"/>
           </StackPanel>
 
-          <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-              <Button Content="Clear" Command="{Binding ClearAllCommand}" Foreground="DarkRed" Margin="0,0,4,0"/>
-              <Button Content="Options" Command="{Binding ShowOptionsCommand}" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}"/>
-            </StackPanel>
-            
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-              <NumericUpDown Value="{Binding PrintCount}" Minimum="1" Maximum="99" Margin="0,0,8,0" Increment="1" FormatString="0"/>
-              <Button Content="{Binding Printername, StringFormat=Print ({0})}" Command="{Binding PrintCommand}"/>
-            </StackPanel>
-          </Grid>
+          <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button Content="Clear" Command="{Binding ClearAllCommand}" Foreground="DarkRed" Margin="0,0,4,0"/>
+            <Button Content="Options" Command="{Binding ShowOptionsCommand}" IsEnabled="{Binding IsBusy, Converter={vl:ReverseBoolConverter}}"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <NumericUpDown Value="{Binding PrintCount}" Minimum="1" Maximum="99" Margin="0,0,8,0" Increment="1" FormatString="0"/>
+            <Button Content="{Binding Printername, StringFormat=Print ({0})}" Command="{Binding PrintCommand}"/>
+          </StackPanel>
         </Grid>
       </HeaderedContentControl>
 
