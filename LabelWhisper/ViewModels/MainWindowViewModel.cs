@@ -70,6 +70,8 @@ namespace LabelWhisper.ViewModels
         partial void OnLine1Changed(string value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedRowText[0] = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -78,6 +80,8 @@ namespace LabelWhisper.ViewModels
         partial void OnLine2Changed(string value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedRowText[1] = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -86,6 +90,8 @@ namespace LabelWhisper.ViewModels
         partial void OnLine3Changed(string value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedRowText[2] = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -94,6 +100,8 @@ namespace LabelWhisper.ViewModels
         partial void OnLine4Changed(string value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedRowText[3] = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -102,6 +110,8 @@ namespace LabelWhisper.ViewModels
         partial void OnFreeTextChanged(string value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedFreetext = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -110,6 +120,8 @@ namespace LabelWhisper.ViewModels
         partial void OnUseTextfieldChanged(bool value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedTextOption = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -118,6 +130,8 @@ namespace LabelWhisper.ViewModels
         partial void OnDrawEmpfaengerChanged(bool value)
         {
             Dispatcher.UIThread.Invoke(async () => await this.RenderImage());
+            Globals.UserConfig.RuntimeConfiguration.LastUsedDrawDefault = value;
+            Task.Run(() => Globals.UserConfig.Save());
         }
 
         [ObservableProperty]
@@ -137,10 +151,8 @@ namespace LabelWhisper.ViewModels
                 this.Status = e;
             };
 
-            if (Globals.UserConfig != null)
-            {
-                this.SelectedTextSize = Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize == default ? this.AvailableTextSizes[^1] : Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize;
-            }
+            this.LoadUserConfigSettingsToViewModel();
+
             this.Title = $"{this.appTitle} {this.AppVersion}";
 
             this.textWaitingAnimation = new()
@@ -153,6 +165,25 @@ namespace LabelWhisper.ViewModels
             this.textWaitingAnimation.Start();
 
             this.RefreshOptionDisplay();
+        }
+
+        private void LoadUserConfigSettingsToViewModel()
+        {
+            if (Globals.UserConfig != null)
+            {
+                this.SelectedTextSize = Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize == default ? this.AvailableTextSizes[^1] : Globals.UserConfig.RuntimeConfiguration.LastUsedTextsize;
+                this.DrawEmpfaenger = Globals.UserConfig.RuntimeConfiguration.LastUsedDrawDefault;
+                this.FreeText = Globals.UserConfig.RuntimeConfiguration.LastUsedFreetext;
+                this.UseTextfield = Globals.UserConfig.RuntimeConfiguration.LastUsedTextOption;
+
+                if (Globals.UserConfig.RuntimeConfiguration.LastUsedRowText.Count != 0)
+                {
+                    foreach (PropertyInfo p in typeof(MainWindowViewModel).GetProperties().Where(p => p.Name.StartsWith("Line") && p.CanWrite))
+                    {
+                        p.SetValue(this, Globals.UserConfig.RuntimeConfiguration.LastUsedRowText[int.Parse(p.Name[(p.Name.IndexOf("Line") + 4)..]) - 1]);
+                    }
+                }
+            }
         }
 
         private void TextWaitingAnimation_AnimationChanged(object sender, string e)
