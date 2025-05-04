@@ -1,4 +1,4 @@
-﻿namespace LabelPrinter.Logic
+﻿namespace LabelWhisper.Logic
 {
     public static class Conversions
     {

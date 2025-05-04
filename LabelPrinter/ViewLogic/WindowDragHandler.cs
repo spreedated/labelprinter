@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using System;
 
-namespace LabelPrinter.ViewLogic
+namespace LabelWhisper.ViewLogic
 {
     public class WindowDragHandler
     {

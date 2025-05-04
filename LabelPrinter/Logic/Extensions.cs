@@ -1,7 +1,7 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace LabelPrinter.Logic
+namespace LabelWhisper.Logic
 {
     internal static class Extensions
     {

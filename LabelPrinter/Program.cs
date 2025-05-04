@@ -1,5 +1,5 @@
 ﻿using Avalonia;
-using LabelPrinter.Logic;
+using LabelWhisper.Logic;
 using Microsoft.Extensions.Logging;
 using neXn.Lib.ConfigurationHandler;
 using QuestPDF.Infrastructure;
@@ -11,8 +11,9 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace LabelPrinter
+namespace LabelWhisper
 {
     internal static class Program
     {
@@ -66,6 +67,17 @@ namespace LabelPrinter
             }
             sw.Stop();
             logger.LogTrace("Deployed resources in {ElapsedMilliseconds}ms", sw.ElapsedMilliseconds);
+
+            //Discover Printers
+            Task.Run(() =>
+            {
+                foreach (string p in neXn.Lib.PrinterManagement.Query.GetInstalledPrinters(neXn.Lib.PrinterManagement.Query.PrinterFilter.OnlyLabelPrinters))
+                {
+                    Globals.IntalledPrinters.Add(p);
+                }
+
+                logger.LogInformation("Found ({Printercount}) printers on system", Globals.IntalledPrinters.Count);
+            });
 
             logger.LogTrace("Loading/building app...");
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);

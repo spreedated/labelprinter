@@ -1,8 +1,8 @@
 using Avalonia.Controls;
-using LabelPrinter.ViewLogic;
-using LabelPrinter.ViewModels;
+using LabelWhisper.ViewLogic;
+using LabelWhisper.ViewModels;
 
-namespace LabelPrinter.Views;
+namespace LabelWhisper.Views;
 
 public partial class Options : Window
 {

@@ -1,11 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:LabelPrinter.ViewModels"
-        xmlns:vl="using:LabelPrinter.ViewLogic"
+        xmlns:vm="using:LabelWhisper.ViewModels"
+        xmlns:vl="using:LabelWhisper.ViewLogic"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:nui="using:neXn.Ui"
         mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="400"
-        x:Class="LabelPrinter.Views.MainWindow"
+        x:Class="LabelWhisper.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/icon.ico"
         Title="{Binding Title}"
@@ -145,7 +146,10 @@
       <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Status}" HorizontalAlignment="Left"/>
       </StackPanel>
-      <TextBlock Text="{Binding AppVersion}" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontStyle="Italic" FontSize="12" Margin="0,0,4,0" FontWeight="Bold" Foreground="#555555" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <TextBlock Text="{Binding AppVersion}" FontStyle="Italic" FontSize="10" Margin="0,0,8,0" FontWeight="Bold" Foreground="#555555" />
+        <TextBlock Grid.Column="1" x:DataType="nui:Constants" Text="{x:Static nui:Constants.HEART_CREDIT}" FontSize="10" Foreground="#888888" HorizontalAlignment="Right" />
+      </StackPanel>
     </Grid>
   </Grid>
 

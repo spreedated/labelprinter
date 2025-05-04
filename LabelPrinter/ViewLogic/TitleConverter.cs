@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace LabelPrinter.ViewLogic
+namespace LabelWhisper.ViewLogic
 {
     public sealed class TitleConverter : MarkupExtension, IMultiValueConverter
     {

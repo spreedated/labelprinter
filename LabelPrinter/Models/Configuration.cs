@@ -1,4 +1,4 @@
-﻿namespace LabelPrinter.Models
+﻿namespace LabelWhisper.Models
 {
     public sealed record Configuration
     {
