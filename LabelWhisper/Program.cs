@@ -69,6 +69,7 @@ namespace LabelWhisper
             logger.LogTrace("Deployed resources in {ElapsedMilliseconds}ms", sw.ElapsedMilliseconds);
 
             //Discover Printers
+            //TODO: Make background process loading ...
             Task.Run(() =>
             {
                 foreach (string p in neXn.Lib.PrinterManagement.Query.GetInstalledPrinters(neXn.Lib.PrinterManagement.Query.PrinterFilter.OnlyLabelPrinters))

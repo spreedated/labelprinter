@@ -32,6 +32,11 @@ namespace LabelWhisper.ViewModels
         [ObservableProperty]
         private string selectedAvailablePrinter;
 
+        partial void OnSelectedAvailablePrinterChanged(string value)
+        {
+            this.PrinterName = value;
+        }
+
         #region Ctor
         public OptionsViewModel()
         {
