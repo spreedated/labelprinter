@@ -38,7 +38,14 @@ namespace LabelWhisper
             QuestPDF.Settings.License = LicenseType.Community;
             logger.LogTrace("QuestPDF Community license set");
 
-            Globals.UserConfig = new ConfigurationHandler<Models.Configuration>(new(Path.Combine(AppContext.BaseDirectory, "config", "config.json")));
+            string userConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "neXn-Systems", "LabelWhisper", "config", "config.json");
+
+            if (string.IsNullOrEmpty(userConfigPath))
+            {
+                userConfigPath = Path.Combine(AppContext.BaseDirectory, "config", "config.json");
+            }
+
+            Globals.UserConfig = new ConfigurationHandler<Models.Configuration>(new(userConfigPath));
             Globals.UserConfig.Load().Wait();
             logger.LogInformation("Loaded user config");
 
