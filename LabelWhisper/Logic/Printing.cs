@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LabelWhisper.Logic
@@ -12,7 +13,17 @@ namespace LabelWhisper.Logic
     {
         public static async Task Print(float labelWidth, float labelHeight, Bitmap image, int printCount = 1)
         {
-            string pdfPath = Path.Combine(AppContext.BaseDirectory, "tmp", "tmp.pdf");
+            StringBuilder randomFilename = new();
+
+            for (int i = 0; i < 6; i++)
+            {
+                Random rnd = new(BitConverter.ToInt32(Guid.NewGuid().ToByteArray()));
+                randomFilename.Append((char)rnd.Next(65, 90));
+            }
+
+            randomFilename.Append(".pdf");
+
+            string pdfPath = Path.Combine(Program.AppLocalBasePath, "tmp", randomFilename.ToString());
 
             if (!Directory.Exists(Path.GetDirectoryName(pdfPath)))
             {
@@ -41,11 +52,13 @@ namespace LabelWhisper.Logic
 
             if (OperatingSystem.IsWindows())
             {
+                string sumatraFileName = string.Join('.', Globals.Assembly.GetManifestResourceNames().First(x =>
+                                                                                                    x.Contains("sumatra", StringComparison.InvariantCultureIgnoreCase) &&
+                                                                                                    x.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase)).Split('.').Skip(2));
+
                 await Process.Start(new ProcessStartInfo()
                 {
-                    FileName = string.Join('.', Globals.Assembly.GetManifestResourceNames().First(x =>
-                                                                                                    x.Contains("sumatra", StringComparison.InvariantCultureIgnoreCase) &&
-                                                                                                    x.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase)).Split('.').Skip(2)),
+                    FileName = Path.Combine(Program.AppLocalBasePath, sumatraFileName),
                     Arguments = $"-print-settings \"{printCount}x\" -exit-when-done -print-to \"{Globals.UserConfig.RuntimeConfiguration.PrinterName}\" \"{pdfPath}\"",
                     CreateNoWindow = true,
                     UseShellExecute = false
