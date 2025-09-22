@@ -11,7 +11,7 @@
     <AssemblyName>LabelWhisper</AssemblyName>
     <AssemblyTitle>Label Whisper</AssemblyTitle>
     <RootNamespace>LabelWhisper</RootNamespace>
-    <Version>3.2.0</Version>
+    <Version>3.2.1</Version>
     <NoWarn>1701;1702;IDE0063;IDE0290</NoWarn>
     <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -37,20 +37,20 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.3.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.3.0" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.0" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.0" />
+    <PackageReference Include="Avalonia" Version="11.3.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.6" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.6" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.6" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.6" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="QuestPDF" Version="2025.4.2" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.8" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.6" />
-    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="QuestPDF" Version="2025.7.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.7" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
-    <PackageReference Include="System.Management" Version="9.0.4" />
+    <PackageReference Include="System.Management" Version="9.0.9" />
   </ItemGroup>
 
 
