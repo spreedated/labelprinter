@@ -19,6 +19,8 @@ namespace LabelWhisper
     {
         private readonly static LogEventLevel minimumLevel = LogEventLevel.Verbose;
 
+        public static string AppLocalBasePath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "neXn-Systems", "LabelWhisper");
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -38,7 +40,14 @@ namespace LabelWhisper
             QuestPDF.Settings.License = LicenseType.Community;
             logger.LogTrace("QuestPDF Community license set");
 
-            Globals.UserConfig = new ConfigurationHandler<Models.Configuration>(new(Path.Combine(AppContext.BaseDirectory, "config", "config.json")));
+            string userConfigPath = Path.Combine(AppLocalBasePath, "config", "config.json");
+
+            if (string.IsNullOrEmpty(userConfigPath))
+            {
+                userConfigPath = Path.Combine(AppContext.BaseDirectory, "config", "config.json");
+            }
+
+            Globals.UserConfig = new ConfigurationHandler<Models.Configuration>(new(userConfigPath));
             Globals.UserConfig.Load().Wait();
             logger.LogInformation("Loaded user config");
 
@@ -51,13 +60,13 @@ namespace LabelWhisper
                 {
                     string filename = string.Join('.', f.Split('.').Skip(2));
 
-                    string filepath = Path.Combine(AppContext.BaseDirectory, filename);
+                    string filepath = Path.Combine(AppLocalBasePath, filename);
 
                     if (!File.Exists(filepath))
                     {
                         using (Stream s = Globals.Assembly.GetManifestResourceStream($"{Globals.Assembly.GetName().Name}.Extern.{filename}"))
                         {
-                            using (FileStream fs = File.Create(filename))
+                            using (FileStream fs = File.Create(filepath))
                             {
                                 s.CopyTo(fs);
                             }
